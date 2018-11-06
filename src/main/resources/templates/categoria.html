@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Lista de Categorias</title>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+</head>
+<body>
+<header th:insert="fragments/header :: header"> </header>
+<div class="container">
+
+<div id="categorias">
+	
+	
+	<table class="table table-hover">		
+		<thead>
+			<tr>
+				<th colspan="3">Categorias cadastradas</th>
+			</tr>
+			<tr>				
+				<th>Id da Categoria</th>
+				<th>Nome da Categoria</th>
+				<th>Ações</th>
+			</tr>			
+		</thead>		
+		<tbody th:if="${#lists.isEmpty(categorias)}">
+		    <tr>
+		        <td colspan="3">Não há categorias cadastradas</td>
+		</tbody>
+		<tbody th:if="${not #lists.isEmpty(categorias)}">
+			<tr th:each="categoria : ${categorias}">
+				<td><span th:text="${categoria.idCategoria}"></span></td>		
+				<td><span th:text="${categoria.nome}"></span></td>
+				<td>
+					<a th:href="@{'categoria/atualizar/{idCategoria}'(idCategoria=${categoria.idCategoria})}" th:attr="name=${categoria.idCategoria}" class="btn btn-primary">Editar</a>
+					<a th:href="@{'categoria/excluir/{idCategoria}'(idCategoria=${categoria.idCategoria})}" th:attr="name=${categoria.idCategoria}" class="btn btn-danger">Remover</a>
+				</td>			
+			</tr>
+		</tbody>
+	</table>
+</div>
+</div>
+
+</body>
+</html>
