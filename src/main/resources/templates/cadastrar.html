@@ -14,14 +14,19 @@
 	 </div>
 	<form method="POST" action="salvar">
 	  <div class="form-group">
-	    <label for="nome">Nome</label>
-	    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do produto">	    
+		   <select id="categorias" th:field="*{categorias}">
+			    <option value="">Selecione a Categoria</option>
+			    <option th:each="categorias : ${categorias}" th:value="${categorias.idCategoria}" th:text="${categorias.nome}" selected="selected"></option>
+		   </select>  
+	  </div>		
+	  <div class="form-group">
+		  <label for="nome">Nome do Produto</label>
+		  <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do produto">	    
 	  </div>
 	  <div class="form-group">
-	    <label for="preco">Preço</label>
-	    <input type="text" class="form-control" id="preco" name="preco" placeholder="Preço do produto">
+		  <label for="preco">Preço do Produto</label>
+		  <input type="text" class="form-control" id="preco" name="preco" placeholder="Preço do produto">
 	  </div>
-	  
 	  <button type="submit" class="btn btn-primary">Cadastrar produto</button>
 	</form>
 </div>

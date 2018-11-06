@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bazar.sistema.model.Categoria;
 import com.bazar.sistema.model.Produto;
+import com.bazar.sistema.repository.CategoriaRepository;
 import com.bazar.sistema.repository.ProdutoRepository;
 
 @Controller
@@ -21,12 +23,16 @@ public class ProdutoResource {
 	@Autowired
 	private ProdutoRepository produtoRepository; 
 	
+	@Autowired
+	private CategoriaRepository categoriaRepository;
+	
 //	Navega até o index
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model) {	
 		model.addAttribute("produto", new Produto());
 		return "/index";
 	}
+	
 //	Verifica se existe o arquivo html produtos
 	@RequestMapping(value = "/produtos", method = RequestMethod.GET)	
 	public String listar(Model model) { 
@@ -34,11 +40,19 @@ public class ProdutoResource {
 		model.addAttribute("produtos", produtos);
 		return "/produtos";
 	}
-//		Verifica se existe o arquivo html cadastrar
+	
+//	Verifica se existe o arquivo html cadastrar
 	@RequestMapping(value = "/cadastrar")
-	public String novo() {
+	public String novo(Model model) {
+		
+		List<Categoria> categorias = categoriaRepository.findAll();
+		model.addAttribute("categorias", categorias);
+		
 		return "/cadastrar";
 	}
+	
+	
+	
 	
 //	Salva e edita produtos
 	@RequestMapping(value = "/salvar")	
@@ -48,9 +62,9 @@ public class ProdutoResource {
 		produto.setNome(nome);
 		produto.setPreco(preco);
 		
-		//Categoria categ = categoriaRepository.findById(idCategoria).get();
+//		Categoria categegoria = categoriaRepository.findById(idCategoria).get();
+//		produto.setCategoria(categoria);
 		
-		//produto.setCategoria(categoria);
 		produtoRepository.save(produto);
 		
 		return new ModelAndView("redirect:/produtos");
