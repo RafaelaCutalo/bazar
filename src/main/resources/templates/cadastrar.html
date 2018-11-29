@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <title>Bazar</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+<link  href="bootstrap/css/estilo.css" rel="stylesheet" >
 </head>
 <body>
 <header th:insert="fragments/header :: header"> </header>
@@ -12,13 +13,7 @@
 		<div th:if="${msg_resultado}">						 	
 	 	<p id="p-mensagem-sucesso" class="sucesso-msg" th:text="${msg_resultado}" >...</p>		
 	 </div>
-	<form method="POST" action="salvar">
-	  <div class="form-group">
-		   <select id="categorias" th:field="*{categorias}">
-			    <option value="">Selecione a Categoria</option>
-			    <option th:each="categorias : ${categorias}" th:value="${categorias.idCategoria}" th:text="${categorias.nome}" selected="selected"></option>
-		   </select>  
-	  </div>		
+	<form method="POST" action="salvar">	
 	  <div class="form-group">
 		  <label for="nome">Nome do Produto</label>
 		  <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do produto">	    
@@ -27,6 +22,17 @@
 		  <label for="preco">Preço do Produto</label>
 		  <input type="text" class="form-control" id="preco" name="preco" placeholder="Preço do produto">
 	  </div>
+	  
+	  
+	  inclusão da categoria ao cadatrar produto! (falta relacionar com o banco -> produto + categoria!)
+	  <div class="form-group categSelect">
+		   <select id="categorias"  class="form-control" th:field="*{categorias}">
+			    <option value="">Selecione a Categoria</option>
+			    <option th:each="categorias : ${categorias}" th:value="${categorias.idCategoria}" th:text="${categorias.nome}" selected="selected"></option>
+		   </select>  
+	  </div>	  
+	  
+	  
 	  <button type="submit" class="btn btn-primary">Cadastrar produto</button>
 	</form>
 </div>

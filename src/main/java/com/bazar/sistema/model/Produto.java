@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +20,7 @@ public class Produto {
 	private Double preco;
 	
 	//private Categoria categoria;
-	
+
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -38,6 +40,8 @@ public class Produto {
 		this.preco = preco;
 	}
 	
-	
+	@ManyToOne
+	@JoinColumn(name="categoria_id")
+	private Categoria categoria;	
 	
 }

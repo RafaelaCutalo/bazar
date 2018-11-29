@@ -1,8 +1,11 @@
 package com.bazar.sistema.model;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -12,6 +15,9 @@ public class Categoria {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idCategoria;
 	private String nome;
+	
+	@OneToMany(mappedBy="produto")
+	private List<Produto> produtos;
 
 	public Long getIdCategoria() {
 		return idCategoria;
